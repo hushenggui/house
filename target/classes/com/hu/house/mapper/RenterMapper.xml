@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.house.mapper.RenterMapper">
+  <select id="findAllRenter" parameterType="com.hu.house.pojo.Renter" resultType="com.hu.house.pojo.Renter">
+   select * from renter where 1=1
+     <if test='name!=""'>
+     and name like concat ('%',#{name},'%')
+     </if>
+     <if test='tel!=""'>
+     and tel like concat('%',#{tel},'%')
+     </if>
+     <if test='idCard!=""'>
+     and idCard like concat('%',#{idCard},'%')
+     </if>
+  
+  </select>
+  <delete id="deleteRenterById" >
+   delete from renter where id=#{id}
+  </delete>
+  <select id="findRenterById" resultType="com.hu.house.pojo.Renter">
+  select * from renter where id=#{id}
+  </select>
+  <update id="updateRenterById" parameterType="com.hu.house.pojo.Renter">
+  update renter r set r.tel=#{tel} , r.name=#{name}, r.idCard=#{idCard} ,r.descc=#{descc}   where r.id=#{id};
+  
+  </update>
+  <insert id="addRenter" parameterType="com.hu.house.pojo.Renter">
+    insert into renter(name, room,tel,idCard,descc) values(#{name},#{room},#{tel},#{idCard},#{descc})
+  </insert>
+</mapper>

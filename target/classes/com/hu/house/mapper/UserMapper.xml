@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.house.mapper.UserMapper">
+   <select id="findUser" resultType="com.hu.house.pojo.User"  parameterType="com.hu.house.pojo.User" >
+      select * from users where uname=#{uname} and password=#{password}
+   </select>
+</mapper>

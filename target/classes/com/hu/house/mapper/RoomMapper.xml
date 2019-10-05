@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hu.house.mapper.RoomMapper">
+   <select id="findAllRoom" resultType="com.hu.house.pojo.Room" parameterType="com.hu.house.pojo.Room">
+     select * from room where 1=1
+     <if test='rname!=""'>
+     and rname like concat ('%',#{rname},'%')
+     </if>
+     <if test='renterName!=""'>
+     and renterName like concat('%',#{renterName},'%')
+     </if>
+      <if test='statuss!=""'>
+      and statuss =#{statuss}
+     </if>
+      <if test="price!=null">
+      and price &lt;#{price}
+     </if>
+      <if test="size!=null">
+      and size &gt;#{size}
+     </if>
+   </select>
+   
+   
+   <delete id="deleteRoomById">
+    delete  from room where id=#{id}
+   </delete>
+   <select id="findRoomById" resultType="com.hu.house.pojo.Room">
+   select * from room where id=#{id}
+   </select>
+   <select id="findRoomByName" resultType="com.hu.house.pojo.Room">
+   select * from room where rname=#{rname}
+   </select>
+   <update id="updateRoomById" parameterType="com.hu.house.pojo.Room">
+   update room r set r.payWays=#{payWays} , r.statuss=#{statuss}, r.size=#{size}, r.descc=#{descc}    where r.id=#{id};
+   </update>
+</mapper>
